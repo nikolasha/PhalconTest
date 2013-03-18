@@ -1,0 +1,5 @@
+<ul class="menu">
+<?php foreach ($items as $key => $item): ?>
+    <li><a href="<?= $item[1] ?>" class="<?= $itemSelected == $key ? 'selected' : '' ?>"><?= $item[0] ?></a></li>
+<?php endforeach; ?>
+</ul>
