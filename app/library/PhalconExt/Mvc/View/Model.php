@@ -40,8 +40,8 @@ class Model
     /**
      * Constructor.
      *
-     * @param array|string $vars
-     * @param string       $template
+     * @param array  $vars
+     * @param string $template
      */
     public function __construct($vars = null, $template = null)
     {

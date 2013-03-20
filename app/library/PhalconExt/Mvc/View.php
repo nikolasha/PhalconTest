@@ -3,6 +3,7 @@
 namespace PhalconExt\Mvc;
 
 use PhalconExt\Mvc\View\Model as ViewModel;
+use Phalcon\Text;
 
 class View extends \Phalcon\Mvc\View
 {
@@ -16,6 +17,7 @@ class View extends \Phalcon\Mvc\View
      * @param  boolean          $silence
      * @param  boolean          $mustClean
      * @param  \Phalcon\Cache\BackendInterface|false $cache
+     * @throws \Phalcon\Mvc\View\Exception
      * @return void
      */
     protected function _engineRender($engines, $template, $silence, $mustClean, $cache)
@@ -139,7 +141,7 @@ class View extends \Phalcon\Mvc\View
             return false;
         }
 
-        $actionName = strtr(\Phalcon\Text::uncamelize($actionName), '_', '-');
+        $actionName = strtr(Text::uncamelize($actionName), '_', '-');
 
         $this->_controllerName = $controllerName;
         $this->_actionName = $actionName;
@@ -191,7 +193,7 @@ class View extends \Phalcon\Mvc\View
 
             $engines = $this->_loadTemplateEngines();
 
-            $cache = null;
+            $cache = false;
             if ($this->_cacheLevel) {
                 $cache = $this->getCache();
             }
@@ -270,7 +272,7 @@ class View extends \Phalcon\Mvc\View
         return true;
     }
 
-    protected function renderTemplatesBeforeOrAfter(array $engines, array $templates, $cache = null)
+    protected function renderTemplatesBeforeOrAfter(array $engines, array $templates, $cache)
     {
         /** @var $template string|\PhalconExt\Mvc\View\Model */
         foreach ($templates as $template) {
